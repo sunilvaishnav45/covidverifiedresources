@@ -2,7 +2,7 @@ import React from 'react';
 import Loader from "react-loader-spinner";
 import HttpServices from '../Services/HttpService';
 
-class VerifiedHospitals extends React.Component {
+class CasesReport extends React.Component {
 
     constructor(props) {
         super(props);
@@ -20,7 +20,7 @@ class VerifiedHospitals extends React.Component {
 
     fetchData() {
         let httpServices = new HttpServices();
-        httpServices.getVerifiedHospitals()
+        httpServices.getCasesReport()
             .then(data => {
                 this.setState({
                     hospitals: data.data.data.regional,
@@ -61,7 +61,7 @@ class VerifiedHospitals extends React.Component {
                             <div className="container-fluid">
                                 <div className="row">
                                     <div className="col-12 text-center mt-3">
-                                        <span className="font-weight-bold text-uppercase"> Hospitals </span>
+                                        <span className="font-weight-bold text-uppercase"> Cases </span>
                                     </div>
                                 </div>
                                 <hr />
@@ -82,25 +82,25 @@ class VerifiedHospitals extends React.Component {
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">State</th>
-                                                    <th scope="col">Totals Hospitals</th>
-                                                    <th scope="col">Total Beds</th>
-                                                    <th scope="col">Urban Beds</th>
-                                                    <th scope="col">Rural Beds</th>
-                                                    <th scope="col">as on</th>
+                                                    <th scope="col">Indains</th>
+                                                    <th scope="col">Foreigner</th>
+                                                    <th scope="col">Discharged</th>
+                                                    <th scope="col">Deaths</th>
+                                                    <th scope="col">Confirmed</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 {
                                                     this.state.hospitals.map((hospital, index) => {
                                                         return (
-                                                            <tr>
+                                                            <tr className= {hospital.totalConfirmed > 30000 ? 'table-danger' : 'table-success'}>
                                                                 <th scope="row">{index+1}</th>
-                                                                <td>{hospital.state}</td>
-                                                                <td>{hospital.totalHospitals}</td>
-                                                                <td>{hospital.totalBeds}</td>
-                                                                <td>{hospital.urbanBeds}</td>
-                                                                <td>{hospital.ruralBeds}</td>
-                                                                <td>{hospital.asOn}</td>
+                                                                <td>{hospital.loc}</td>
+                                                                <td>{hospital.confirmedCasesIndian}</td>
+                                                                <td>{hospital.confirmedCasesForeign}</td>
+                                                                <td>{hospital.discharged}</td>
+                                                                <td>{hospital.deaths}</td>
+                                                                <td>{hospital.totalConfirmed}</td>
                                                             </tr>
                                                         );
                                                     })
@@ -123,4 +123,4 @@ class VerifiedHospitals extends React.Component {
 
 }
 
-export default VerifiedHospitals;
+export default CasesReport;

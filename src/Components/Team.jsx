@@ -4,19 +4,17 @@ class Team extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            hospitals : [],
-        }
-    }
-
-    componentDidMount() {
-        //TODO fetch verfied hospitals here
+       
     }
 
     render() {
         return (
             <React.Fragment>
-                This is team details
+                <div className="row">
+                    <div className="col-12 text-center mt-5">
+                        <h2 className="font-weight-bold text-uppercase"> Under development </h2>
+                    </div>
+                </div>
             </React.Fragment>
         );
     }
